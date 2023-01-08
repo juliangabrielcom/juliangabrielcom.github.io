@@ -8,11 +8,7 @@ div[class*="stNumberInput"] input {
   font-weight: bold;
 }
 
-div[class*="markdown-text-container stText"] {
-  color: red;
-}
-
-/*Seitenrahmen*/
+/*page frame*/
 div.css-18e3th9 {
                     padding-top: 0rem;
                     padding-bottom: 0rem;
@@ -20,7 +16,7 @@ div.css-18e3th9 {
                     padding-right: 0rem;
                 }
 
-/*Textfelder*/
+/*texts*/
 div.css-183lzff.eyqtai90 {
                     font-family: "Arial";
                     font-weight: bold;
