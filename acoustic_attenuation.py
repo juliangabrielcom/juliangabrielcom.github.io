@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 with open('styles.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-st.title("Acoustic Attenuation Version 0.2")
+st.title("Acoustic Attenuation Version 0.3")
 
 f_s = 48e3
 f_analog = create_f_analog(20, 20e3, 1e3)
