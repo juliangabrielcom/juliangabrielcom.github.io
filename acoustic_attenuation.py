@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 with open('styles.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-st.title("Acoustic Attenuation")
+st.title("Acoustic Attenuation Version 0.2")
 
 f_s = 48e3
 f_analog = create_f_analog(20, 20e3, 1e3)
@@ -28,20 +28,23 @@ with subtitle_container:
     with a2:
         st.text('Current Filter Coefficient Estimation')
 
+if 'init_temp' not in st.session_state:
+    st.session_state['init_temp'] = 21.0
+
 value_container = st.container()
 with value_container:
     c1, c2, c3, c4, c5, c6 = st.columns(6, gap="large")
 
     with c1:
-        init_temp = st.number_input('Initial Temperature in °C', value=21.0, step=0.1, min_value=-40.0, max_value=60.0,
+        st.session_state.init_temp = st.number_input('Initial Temperature in °C', value=21.0, step=0.1, min_value=-40.0, max_value=60.0,
                                     format="%.1f")
         init_hum = st.number_input('Initial Humidity in %', value=60, step=1, min_value=1, max_value=100)
         init_pres = st.number_input('Initial Pressure in Pa', value=1013, step=1, min_value=850, max_value=1100)
         init_dist = st.number_input('Initial Distance in m', value=15.0, step=0.1, min_value=0.0, max_value=1000.0,
                                     format="%.2f")
 
-        init_disp = calc_dissipation(f_analog, init_temp, init_hum, init_dist, init_pres)
-        init_gain = calc_dissipation(f_up, init_temp, init_hum, init_dist, init_pres)
+        init_disp = calc_dissipation(f_analog, st.session_state.init_temp, init_hum, init_dist, init_pres)
+        init_gain = calc_dissipation(f_up, st.session_state.init_temp, init_hum, init_dist, init_pres)
         init_Q = optimize_high_shelf_q_factor(f_digital, init_gain, f_analog_2_digital(f_up, f_s), init_disp)
         abs_plot.add_trace(go.Scatter(x=f_analog, y=init_disp, mode='lines', line=dict(color='red')))
         abs_plot.add_trace(go.Scatter(x=f_analog, y=calc_high_shelf(f_digital, init_gain, f_analog_2_digital(f_up, f_s), init_Q)
