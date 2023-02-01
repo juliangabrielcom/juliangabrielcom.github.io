@@ -66,3 +66,7 @@ def create_f_digital(f_end_analog, fs, n):
 
 def f_analog_2_digital(f_analog, fs):
     return 2 * np.pi * f_analog / fs
+
+
+def q_to_bw(q):
+    return np.divide(2 * np.arcsinh(1/(2*q)), np.log(2))

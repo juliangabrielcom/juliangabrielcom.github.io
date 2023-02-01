@@ -30,8 +30,9 @@ def get_plot(plot_type='absolute'):
             tickfont=dict(size=16),
             ticks="outside"
         ),
-        showlegend=False,
-        margin=dict(pad=0)
+        showlegend=True,
+        margin=dict(pad=0),
+        legend=dict(font=dict(size=16, family="Arial"))
     )
     if plot_type == 'absolute':
         plot.update_yaxes(
